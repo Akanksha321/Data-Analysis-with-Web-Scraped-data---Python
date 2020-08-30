@@ -1,2 +1,2 @@
-# Data-Analysis-with-Web-Scraped-data---Python
-This repository contains dateset which have been scraped from various websites for analysis. 
+# Data Analysis with Web Scraped data - Python
+This repository contains datasets which have been scraped from various websites for analysis. 
