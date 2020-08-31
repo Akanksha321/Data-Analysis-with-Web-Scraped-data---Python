@@ -1,5 +1,7 @@
 # Data Analysis with Web Scraped data - Python
-This repository contains datasets which have been scraped from various websites for analysis. Till now following datasets have been collected -
+This repository contains datasets which have been scraped from various websites for analysis. 
+I have used  <b> BeautifulSoup </b> for data gathering. 
+Till now following datasets have been collected -
 
 1. <b> Zomato Pune Restaurants  </b> - Want to find out the most expensive restaurant in Pune? Or have ever wondered which is the most rated restaurant? To get answers for some of        the questions I scraped hundreds of pages of zomato pune. 
 
