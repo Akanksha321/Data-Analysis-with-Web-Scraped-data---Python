@@ -1,1 +1,72 @@
-{"cells":[{"metadata":{"_uuid":"e7ca6074-f4c7-4bf1-85cd-7899d670270d","_cell_guid":"a619e525-d086-48a9-ba5e-6d6502053c03","trusted":true},"cell_type":"code","source":"from flask import Flask,render_template,url_for,request\nimport pandas as pd \nimport pickle\nfrom sklearn.feature_extraction.text import TfidfVectorizer\nfrom sklearn.ensemble import RandomForestClassifier\n\nimport pickle\n\nimport joblib\n\n\n# load the model from disk\nfilename = 'senti_model.pkl'\nclf = pickle.load(open(filename, 'rb'))\ncv=pickle.load(open('transform.pkl','rb'))\napp = Flask(__name__)\n\n@app.route('/')\ndef home():\n\treturn render_template('home.html')\n\n@app.route('/predict',methods=['POST'])\ndef predict():\n#\tdf= pd.read_csv(\"spam.csv\", encoding=\"latin-1\")\n#\tdf.drop(['Unnamed: 2', 'Unnamed: 3', 'Unnamed: 4'], axis=1, inplace=True)\n#\t# Features and Labels\n#\tdf['label'] = df['class'].map({'ham': 0, 'spam': 1})\n#\tX = df['message']\n#\ty = df['label']\n#\t\n#\t# Extract Feature With CountVectorizer\n#\tcv = CountVectorizer()\n#\tX = cv.fit_transform(X) # Fit the Data\n#    \n#    pickle.dump(cv, open('tranform.pkl', 'wb'))\n#    \n#    \n#\tfrom sklearn.model_selection import train_test_split\n#\tX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)\n#\t#Naive Bayes Classifier\n#\tfrom sklearn.naive_bayes import MultinomialNB\n#\n#\tclf = MultinomialNB()\n#\tclf.fit(X_train,y_train)\n#\tclf.score(X_test,y_test)\n#    filename = 'nlp_model.pkl'\n#    pickle.dump(clf, open(filename, 'wb'))\n    \n\t#Alternative Usage of Saved Model\n\t# joblib.dump(clf, 'NB_spam_model.pkl')\n\t# NB_spam_model = open('NB_spam_model.pkl','rb')\n\t# clf = joblib.load(NB_spam_model)\n\n\tif request.method == 'POST':\n\t\tmessage = request.form['message']\n\t\tdata = [message]\n\t\tvect = tfidf.transform(reviews[\"feedback\"]).toarray()\n        \n\t\tmy_prediction = rf.predict(vect)\n\treturn render_template('result.html',prediction = my_prediction)\n\n\n\nif __name__ == '__main__':\n\tapp.run(debug=True)","execution_count":14,"outputs":[{"output_type":"error","ename":"FileNotFoundError","evalue":"[Errno 2] No such file or directory: 'senti_model.pkl'","traceback":["\u001b[0;31m---------------------------------------------------------------------------\u001b[0m","\u001b[0;31mFileNotFoundError\u001b[0m                         Traceback (most recent call last)","\u001b[0;32m<ipython-input-14-689573cf112a>\u001b[0m in \u001b[0;36m<module>\u001b[0;34m\u001b[0m\n\u001b[1;32m     12\u001b[0m \u001b[0;31m# load the model from disk\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m     13\u001b[0m \u001b[0mfilename\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0;34m'senti_model.pkl'\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m---> 14\u001b[0;31m \u001b[0mclf\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mpickle\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mload\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mopen\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mfilename\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m'rb'\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m     15\u001b[0m \u001b[0mcv\u001b[0m\u001b[0;34m=\u001b[0m\u001b[0mpickle\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mload\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mopen\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m'tranform.pkl'\u001b[0m\u001b[0;34m,\u001b[0m\u001b[0;34m'rb'\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m     16\u001b[0m \u001b[0mapp\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mFlask\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0m__name__\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n","\u001b[0;31mFileNotFoundError\u001b[0m: [Errno 2] No such file or directory: 'senti_model.pkl'"]}]},{"metadata":{"trusted":true},"cell_type":"code","source":"","execution_count":null,"outputs":[]}],"metadata":{"kernelspec":{"language":"python","display_name":"Python 3","name":"python3"},"language_info":{"pygments_lexer":"ipython3","nbconvert_exporter":"python","version":"3.6.4","file_extension":".py","codemirror_mode":{"name":"ipython","version":3},"name":"python","mimetype":"text/x-python"}},"nbformat":4,"nbformat_minor":4}
+#!/usr/bin/env python
+# coding: utf-8
+
+# In[ ]:
+
+
+from flask import Flask,render_template,url_for,request
+import pandas as pd 
+import pickle
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.ensemble import RandomForestClassifier
+
+import pickle
+
+import joblib
+
+
+# load the model from disk
+filename = 'senti_model.pkl'
+clf = pickle.load(open(filename, 'rb'))
+cv=pickle.load(open('transform.pkl','rb'))
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+	return render_template('home.html')
+
+@app.route('/predict',methods=['POST'])
+def predict():
+#	df= pd.read_csv("spam.csv", encoding="latin-1")
+#	df.drop(['Unnamed: 2', 'Unnamed: 3', 'Unnamed: 4'], axis=1, inplace=True)
+#	# Features and Labels
+#	df['label'] = df['class'].map({'ham': 0, 'spam': 1})
+#	X = df['message']
+#	y = df['label']
+#	
+#	# Extract Feature With CountVectorizer
+#	cv = CountVectorizer()
+#	X = cv.fit_transform(X) # Fit the Data
+#    
+#    pickle.dump(cv, open('tranform.pkl', 'wb'))
+#    
+#    
+#	from sklearn.model_selection import train_test_split
+#	X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)
+#	#Naive Bayes Classifier
+#	from sklearn.naive_bayes import MultinomialNB
+#
+#	clf = MultinomialNB()
+#	clf.fit(X_train,y_train)
+#	clf.score(X_test,y_test)
+#    filename = 'nlp_model.pkl'
+#    pickle.dump(clf, open(filename, 'wb'))
+    
+	#Alternative Usage of Saved Model
+	# joblib.dump(clf, 'NB_spam_model.pkl')
+	# NB_spam_model = open('NB_spam_model.pkl','rb')
+	# clf = joblib.load(NB_spam_model)
+
+	if request.method == 'POST':
+		message = request.form['message']
+		data = [message]
+		vect = tfidf.transform(reviews["feedback"]).toarray()
+        
+		my_prediction = rf.predict(vect)
+	return render_template('result.html',prediction = my_prediction)
+
+
+
+if __name__ == '__main__':
+	app.run(debug=True)
+
