@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[ ]:
+# In[1]:
 
 
 from flask import Flask,render_template,url_for,request
@@ -17,8 +17,8 @@ import joblib
 
 # load the model from disk
 filename = 'senti_model.pkl'
-clf = pickle.load(open(filename, 'rb'))
-cv=pickle.load(open('transform.pkl','rb'))
+rf = pickle.load(open(filename, 'rb'))
+tfidf=pickle.load(open('transform.pkl','rb'))
 app = Flask(__name__)
 
 @app.route('/')
@@ -60,7 +60,7 @@ def predict():
 	if request.method == 'POST':
 		message = request.form['message']
 		data = [message]
-		vect = tfidf.transform(reviews["feedback"]).toarray()
+		vect = tfidf.transform(data).toarray()
         
 		my_prediction = rf.predict(vect)
 	return render_template('result.html',prediction = my_prediction)
@@ -69,4 +69,16 @@ def predict():
 
 if __name__ == '__main__':
 	app.run(debug=True)
+
+
+# In[2]:
+
+
+get_ipython().run_line_magic('tb', '')
+
+
+# In[ ]:
+
+
+
 
